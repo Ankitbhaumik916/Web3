@@ -31,6 +31,11 @@ body {
   transition: color 520ms ease;
 }
 
+body.scroll-locked {
+  overflow: hidden;
+  height: 100vh;
+}
+
 body.frame-text-dark {
   --color-text: #121212;
   --color-link: #121212;

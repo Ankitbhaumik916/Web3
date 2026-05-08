@@ -14,14 +14,61 @@ class PageNavigationManager {
     this.nav = document.querySelector('.navigation')
     this.navLinks = document.querySelectorAll('.nav-link')
     this.scrollIndicator = document.querySelector('.scroll-indicator')
+    this.ctaButton = document.querySelector('.cta-button')
+    this.isScrollUnlocked = false
+
+    this.preventScrollInput = (event) => {
+      if (this.isScrollUnlocked) return
+      event.preventDefault()
+    }
+
+    this.preventScrollKeys = (event) => {
+      if (this.isScrollUnlocked) return
+
+      const blockedKeys = [
+        'ArrowUp',
+        'ArrowDown',
+        'PageUp',
+        'PageDown',
+        'Home',
+        'End',
+        ' ',
+      ]
+
+      if (blockedKeys.includes(event.key)) {
+        event.preventDefault()
+      }
+    }
+
+    this.enforceScrollLock = () => {
+      if (this.isScrollUnlocked) return
+      if (window.scrollY !== 0) {
+        window.scrollTo(0, 0)
+      }
+    }
 
     this.init()
   }
 
   init() {
+    this.lockScrolling()
+
+    if (this.ctaButton && this.sections.gallery) {
+      this.ctaButton.addEventListener('click', (e) => {
+        e.preventDefault()
+        this.unlockScrolling()
+        this.smoothScroll(this.sections.gallery)
+      })
+    }
+
     // Smooth scroll for navigation links
     this.navLinks.forEach(link => {
       link.addEventListener('click', (e) => {
+        if (!this.isScrollUnlocked) {
+          e.preventDefault()
+          return
+        }
+
         e.preventDefault()
         const targetId = link.getAttribute('href')
         const targetSection = document.querySelector(targetId)
@@ -33,7 +80,12 @@ class PageNavigationManager {
 
     // Scroll indicator click
     if (this.scrollIndicator) {
-      this.scrollIndicator.addEventListener('click', () => {
+      this.scrollIndicator.addEventListener('click', (e) => {
+        if (!this.isScrollUnlocked) {
+          e.preventDefault()
+          return
+        }
+
         this.smoothScroll(this.sections.home)
       })
     }
@@ -45,6 +97,8 @@ class PageNavigationManager {
 
     // Anchor link handling
     window.addEventListener('hashchange', () => {
+      if (!this.isScrollUnlocked) return
+
       const target = document.querySelector(window.location.hash)
       if (target) {
         this.smoothScroll(target)
@@ -53,6 +107,27 @@ class PageNavigationManager {
 
     // Initialize
     this.updateNavigation()
+  }
+
+  lockScrolling() {
+    this.isScrollUnlocked = false
+    document.body.classList.add('scroll-locked')
+    window.scrollTo(0, 0)
+
+    window.addEventListener('wheel', this.preventScrollInput, { passive: false })
+    window.addEventListener('touchmove', this.preventScrollInput, { passive: false })
+    window.addEventListener('keydown', this.preventScrollKeys, { passive: false })
+    window.addEventListener('scroll', this.enforceScrollLock)
+  }
+
+  unlockScrolling() {
+    this.isScrollUnlocked = true
+    document.body.classList.remove('scroll-locked')
+
+    window.removeEventListener('wheel', this.preventScrollInput)
+    window.removeEventListener('touchmove', this.preventScrollInput)
+    window.removeEventListener('keydown', this.preventScrollKeys)
+    window.removeEventListener('scroll', this.enforceScrollLock)
   }
 
   smoothScroll(target) {
@@ -92,15 +167,6 @@ class PageNavigationManager {
       }
     })
   }
-}
-
-// Initialize navigation when DOM is ready
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', () => {
-    new PageNavigationManager()
-  })
-} else {
-  new PageNavigationManager()
 }
 
 export { PageNavigationManager }
