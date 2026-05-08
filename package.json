@@ -1,0 +1,37 @@
+{
+  "name": "samarth-agarwal-portfolio",
+  "version": "1.0.0",
+  "description": "Samarth Agarwal - Contemporary Artist Portfolio showcasing immersive visual artworks through a 3D gallery experience.",
+  "author": {
+    "name": "Samarth Agarwal",
+    "email": "samarthaga143@gmail.com",
+    "url": "https://www.instagram.com/sam.art.h.143"
+  },
+  "license": "MIT",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Ankitbhaumik916/Web3"
+  },
+  "scripts": {
+    "copy-images": "node copy-images.js",
+    "dev": "npm run copy-images && vite",
+    "build": "npm run copy-images && vite build",
+    "preview": "vite preview",
+    "lint": "eslint src",
+    "format": "prettier . --write",
+    "format:check": "prettier . --check"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.0.0",
+    "globals": "^17.3.0",
+    "prettier": "^3.8.1",
+    "vite": "^7.3.1",
+    "vite-plugin-glsl": "^1.5.5"
+  },
+  "dependencies": {
+    "three": "^0.183.0",
+    "tweakpane": "^4.0.5"
+  }
+}
