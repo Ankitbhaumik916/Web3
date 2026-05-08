@@ -143,8 +143,8 @@
   position: relative;
   width: 100%;
   padding: 100px var(--page-padding);
-  background: linear-gradient(180deg, #2e2e2e 0%, #1a1a1a 100%);
-  color: #fff;
+  background: linear-gradient(180deg, #0f0f10 0%, #0b0b0b 100%);
+  color: #f5f1e8;
 }
 
 .contact-container {
@@ -175,29 +175,30 @@
 }
 
 .contact-link {
-  padding: 15px 35px;
-  background: rgba(254, 202, 79, 0.2);
-  border: 2px solid #feca4f;
-  color: #feca4f;
+  padding: 14px 36px;
+  background: rgba(255,255,255,0.02);
+  border: 1.5px solid rgba(254,202,79,0.85);
+  color: rgba(254,202,79,0.95);
   text-decoration: none;
   font-size: 0.95rem;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  transition: all 300ms ease;
-  border-radius: 4px;
+  transition: all 240ms ease;
+  border-radius: 6px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.6);
 }
 
 .contact-link:hover {
-  background: #feca4f;
-  color: #2e2e2e;
-  transform: translateY(-3px);
+  background: rgba(254,202,79,0.95);
+  color: #0b0b0b;
+  transform: translateY(-4px);
 }
 
 /* QR Code Section */
 .contact-qr {
   margin-top: 60px;
   padding-top: 60px;
-  border-top: 1px solid rgba(254, 202, 79, 0.3);
+  border-top: 1px solid rgba(254, 202, 79, 0.14);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -205,39 +206,43 @@
 }
 
 .contact-qr-label {
-  font-size: 1.2rem;
-  color: #feca4f;
-  letter-spacing: 0.1em;
+  font-size: 1.15rem;
+  color: rgba(254,202,79,0.95);
+  letter-spacing: 0.12em;
   margin: 0;
   text-transform: uppercase;
+  opacity: 0.95;
+  font-weight: 600;
 }
 
 .qr-frame {
-  border: 3px solid #feca4f;
-  border-radius: 10px;
-  padding: 18px;
-  background: linear-gradient(180deg, #0e0e0e 0%, #131313 100%);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.6);
-  transition: transform 300ms ease, box-shadow 300ms ease;
+  border: 2px solid rgba(254,202,79,0.9);
+  border-radius: 12px;
+  padding: 20px;
+  background: linear-gradient(180deg, #0b0b0b 0%, #111111 100%);
+  box-shadow: 0 12px 36px rgba(0,0,0,0.7), inset 0 1px 0 rgba(255,255,255,0.02);
+  transition: transform 260ms ease, box-shadow 260ms ease;
 }
 
 .qr-frame:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 25px 60px rgba(0,0,0,0.6);
+  transform: translateY(-4px);
+  box-shadow: 0 30px 80px rgba(0,0,0,0.7), inset 0 1px 0 rgba(255,255,255,0.02);
 }
 
 .qr-code {
-  width: 250px;
-  height: 250px;
-  border-radius: 6px;
+  width: 260px;
+  height: 260px;
+  border-radius: 8px;
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
   display: block;
+  background-color: #0b0b0b;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.6);
 }
 
 .qr-code:focus {
-  outline: 2px solid rgba(254,202,79,0.35);
+  outline: 2px solid rgba(254,202,79,0.22);
 }
 
 
